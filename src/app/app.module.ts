@@ -10,14 +10,16 @@ import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TestComponent } from "./test/test.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SearchPipe } from './content/search.pipe';
+import { TestPipe } from './test/test.pipe';
+import { ContentPipe } from './content/content.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         ContentComponent,
         TestComponent,
-        SearchPipe
+        TestPipe,
+        ContentPipe
     ],
     providers: [AppService],
     bootstrap: [AppComponent],

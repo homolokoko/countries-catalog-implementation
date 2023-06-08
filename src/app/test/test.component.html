@@ -1,0 +1,36 @@
+  <div class="container">
+    <mat-form-field class="example-full-width w-100">
+      <mat-label>Search by country name</mat-label>
+      <input matInput [(ngModel)]="searchText">
+    </mat-form-field>
+    <mat-card>
+      <mat-card-content>
+        <b>Sort by Asc/Dec :</b>
+        <button mat-flat-button color="primary">Asc</button>
+        <button mat-flat-button color="accent">Dec</button>
+      </mat-card-content>
+    </mat-card>
+    
+  </div>  
+    
+  
+<div class="container" mat-table>
+  
+    
+
+  <div class="table container table-hover table-striped mat-elevation-z8">
+    <div class="row p-3 bottom-frame">
+      <div class="col header">flag</div>
+      <div class="col header">name</div>
+      <div class="col header">cca2</div>
+      <div class="col header">cca3</div>
+
+    </div>
+    <div class="row bottom-frame"*ngFor="let data of dataSource | test: searchText ">
+      <div class="col"><img style="width:100px" src={{data.flags.png}}  alt=""> </div>
+      <div class="col">{{data.name.official}}</div>
+      <div class="col">{{data.cca2}}</div>
+      <div class="col">{{data.cca3}}</div>
+    </div>
+  </div>
+</div>

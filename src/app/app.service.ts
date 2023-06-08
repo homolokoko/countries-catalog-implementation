@@ -9,10 +9,26 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AppService {
 
   url = "https://restcountries.com/v3.1/all";
-  constructor(private http:HttpClient){}
+  private dataStore!:{content:IContent[]}
+  private _content! : BehaviorSubject<IContent[]>;
 
-  getSearch(nativeName:string):Observable<any>{
-    return this.http.get(`${this.url}/name/official/search=?q=${nativeName}`);
+
+  constructor(private http:HttpClient){
+    this.dataStore = {content:[]};
+    this._content = new BehaviorSubject<IContent[]>([]);
+  }
+  getAll(){
+    this.http.get<IContent[]>(this.url)
+    .subscribe(
+      (data:any) => {
+        this.dataStore.content = data;
+        this._content.next(Object.assign({},this.dataStore).content);
+      }
+    );
+  }
+
+  get contents(): Observable<IContent[]>{
+    return this._content.asObservable();
   }
   
 }

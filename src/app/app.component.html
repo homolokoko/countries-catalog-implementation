@@ -1,25 +1,5 @@
-<!-- <div class="container p-5"> -->
-   <!-- <app-content></app-content>  -->
+<div class="container p-5">
+   <app-content></app-content> 
    <!-- <app-test></app-test> -->
-<!-- </div> -->
-<div class="mat-elevation-z8 p-5">
-   <form action="" [formGroup]="searchForm">
-      <mat-form-field class="example-full-width">
-      <mat-label>Favorite food</mat-label>
-      <input matInput placeholder="Ex. Pizza" value="Sushi" formControlName="search">
-      </mat-form-field>
-   </form>
- 
-   <ng-container *ngIf="dataSource.lenght,else null">
-      <div class="" *ngFor="let item of list">
-         <app-test [items]="item"></app-test>
-      </div>
-      
-   </ng-container>
-   
-   <ng-template #null> <p>Not found!</p> </ng-template>
- 
 </div>
 
-
- 
