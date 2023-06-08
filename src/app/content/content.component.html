@@ -1,66 +1,37 @@
-<mat-form-field filterPredicate [(ngModel)]="val">
-  <mat-label>Input</mat-label>
-  <input matInput>
-</mat-form-field>
-<table mat-table [dataSource]="dataSource" matSort 
-       class="mat-elevation-z8">
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="flag">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
-      Flag
-    </th>
-    <td mat-cell *matCellDef="let element"> <img style="width:70px" src={{element.flags.png}} alt=""> </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="Name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
-      Name
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.name.official}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="cca2">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
-      cca2
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.cca2}} </td>
-  </ng-container>
-
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="cca3">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
-      cca3
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.cca3}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="nativeName">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
-      Native_Name
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.name.nativeName}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="alternativeName">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
-      Alter_Native_Name
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.altSpellings}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="callingCode">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
-      Calling_Code
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.idd.root}} </td>
-  </ng-container>
-
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <b>Sort by Asc/Dec :</b>
+      <button mat-flat-button color="primary">Asc</button>
+      <button mat-flat-button color="accent">Dec</button>
+    </mat-card-content>
+  </mat-card>
+  <mat-form-field class="example-full-width w-100">
+    <mat-label>Search by country name</mat-label>
+    <input matInput [(ngModel)]="searchText">
+  </mat-form-field>
   
-</table>
-<mat-paginator class="paginator" [length]="25" [pageSize]="10" [pageSizeOptions]=[5,10,15,20,25] aria-label="Select page"></mat-paginator>
+</div>  
+  
+
+<div class="container" mat-table>
+
+  
+
+<div class="table container table-hover table-striped mat-elevation-z8">
+  <div class="row p-3 bottom-frame">
+    <div class="col header">flag</div>
+    <div class="col header">name</div>
+    <div class="col header">cca2</div>
+    <div class="col header">cca3</div>
+
+  </div>
+  <div class="row bottom-frame"*ngFor="let data of dataSource | test: searchText ">
+    <div class="col"><img style="width:100px" src={{data.flags.png}}  alt=""> </div>
+    <div class="col">{{data.name.official}}</div>
+    <div class="col">{{data.cca2}}</div>
+    <div class="col">{{data.cca3}}</div>
+  </div>
+</div>
+</div>

@@ -1,10 +1,9 @@
-import { LowerCasePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'search'
+  name: 'content'
 })
-export class SearchPipe implements PipeTransform {
+export class ContentPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     if (!value) return null;

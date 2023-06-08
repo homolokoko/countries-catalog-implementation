@@ -26,29 +26,24 @@ export interface PeriodicElement {
 
 
 export class ContentComponent implements OnInit,AfterViewInit{
-
   
-  val:any='';
-  constructor(private _http:HttpClient){}
+  dataSource:any;
+  searchText="";
+  url="https://restcountries.com/v3.1/all";
+  constructor(private http:HttpClient){}
 
-  // display column followed by displayedColumns array
-  displayedColumns: string[] = ['flag', 'Name', 'cca2', 'cca3','nativeName','alternativeName','callingCode'];
- 
-  @ViewChild(MatPaginator) paginator!:MatPaginator ;
+  @ViewChild(MatPaginator) paginator! : MatPaginator; 
 
-  // read all data from rest api
-  url = "https://restcountries.com/v3.1/all";
-    
-  dataSource:any= new MatTableDataSource<IContent>();
-  ngOnInit() {
-      this._http.get(this.url).subscribe((data:any)=>{this.dataSource=data});
+
+  ngOnInit(): void {
+      this.http.get(this.url)
+      .subscribe( (data:any) => {this.dataSource = data} )
   }
-
-
-  //configuring paginator
-   ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource = new MatTableDataSource<IContent>(this.dataSource);
       this.dataSource.paginator = this.paginator;
+      return this.dataSource;
   }
 
+  
 }
