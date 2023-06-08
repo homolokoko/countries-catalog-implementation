@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component,OnInit } from '@angular/core';
-
-
+import { Component, Input } from '@angular/core';
+import { AppService } from '../app.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -10,22 +9,12 @@ import { Component,OnInit } from '@angular/core';
   styleUrls: ['./test.component.scss'],
   
 })
-export class TestComponent implements OnInit {
-  // url:string = "https://restcountries.com/v3.1/all";
-  // dataSource:any;
-
-  url:string = "https://restcountries.com/v3.1/all";
-  dataSource:any;
+export class TestComponent {
 
 
-  displayedColumns: string[] = ['flag', 'Name', 'cca2', 'cca3','nativeName','alternativeName','callingCode'];
-
-  ngOnInit() {
-      this._http.get(this.url).subscribe((data:any)=>{this.dataSource=data});
-  }
-  constructor(private _http:HttpClient){}
-
-
- 
+  @Input() items:any;
+  
 
 }
+
+

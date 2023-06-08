@@ -9,12 +9,15 @@ import { ContentComponent } from './content/content.component';
 import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TestComponent } from "./test/test.component";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchPipe } from './content/search.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         ContentComponent,
-        TestComponent
+        TestComponent,
+        SearchPipe
     ],
     providers: [AppService],
     bootstrap: [AppComponent],
@@ -24,6 +27,8 @@ import { TestComponent } from "./test/test.component";
         BrowserAnimationsModule,
         MaterialsModule,
         HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule
     ]
 })
 export class AppModule { }

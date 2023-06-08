@@ -1,9 +1,10 @@
 import { MatTableDataSource } from '@angular/material/table';
 import { AppService } from '../app.service';
 import { IContent } from '../content';
-import { Component,OnInit,AfterViewInit, ViewChild } from '@angular/core';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { AfterViewInit, Component,OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
+import { HttpClient } from '@angular/common/http';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 export interface PeriodicElement {
@@ -14,56 +15,40 @@ export interface PeriodicElement {
 }
 
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
-
 
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+  styleUrls: ['./content.component.scss'],
 })
 
 
 
 export class ContentComponent implements OnInit,AfterViewInit{
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  
+  val:any='';
+  constructor(private _http:HttpClient){}
+
+  // display column followed by displayedColumns array
+  displayedColumns: string[] = ['flag', 'Name', 'cca2', 'cca3','nativeName','alternativeName','callingCode'];
+ 
+  @ViewChild(MatPaginator) paginator!:MatPaginator ;
+
+  // read all data from rest api
+  url = "https://restcountries.com/v3.1/all";
+    
+  dataSource:any= new MatTableDataSource<IContent>();
+  ngOnInit() {
+      this._http.get(this.url).subscribe((data:any)=>{this.dataSource=data});
   }
 
-  @ViewChild(MatSort)
-  sort!: MatSort;
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+  //configuring paginator
+   ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource<IContent>(this.dataSource);
+      this.dataSource.paginator = this.paginator;
   }
 
-  /** Announce the change in sort state for assistive technology. */
-  announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
 }
