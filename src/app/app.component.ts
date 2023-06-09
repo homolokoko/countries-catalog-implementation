@@ -18,4 +18,10 @@ export class AppComponent implements OnInit {
     this.fetchData.loadAll().subscribe(data => this.url = data);
     
   }
+
+
+
+
+
+
 }

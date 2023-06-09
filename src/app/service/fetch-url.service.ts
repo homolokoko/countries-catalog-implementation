@@ -8,6 +8,9 @@ import { ObserversModule } from '@angular/cdk/observers';
   providedIn: 'root'
 })
 export class FetchUrlService {
+  sort() {
+    throw new Error('Method not implemented.');
+  }
 
   url="https://restcountries.com/v3.1/all";
 
