@@ -11,9 +11,7 @@ import { MaterialsModule } from './modules/materials.module';
 import { ContentComponent } from './content/content.component';
 import { AppService } from './app.service';
 import { HttpClientModule } from '@angular/common/http';
-import { TestComponent } from "./test/test.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TestPipe } from './test/test.pipe';
 import { ContentPipe } from './content/content.pipe';
 import { FetchUrlService } from './service/fetch-url.service';
 
@@ -21,8 +19,6 @@ import { FetchUrlService } from './service/fetch-url.service';
     declarations: [
         AppComponent,
         ContentComponent,
-        TestComponent,
-        TestPipe,
         ContentPipe,
     ],
     providers: [AppService,FetchUrlService],
