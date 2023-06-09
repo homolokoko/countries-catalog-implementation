@@ -1,5 +1,10 @@
-<div class="container p-5">
-   <app-content></app-content> 
-   <!-- <app-test></app-test> -->
-</div>
+<content>
+   <div class="container-fluid disp" *ngIf="url">
+      <!-- <app-content></app-content>  -->
+      <app-test [restApi]="url"></app-test>
+      <!-- <app-test2 [restApi]="url"></app-test2> -->
+   </div>
+   <mat-spinner class="spin" *ngIf="!url"></mat-spinner>
+</content>
+
 

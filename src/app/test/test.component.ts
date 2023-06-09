@@ -1,9 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
-import { IContent } from '../content';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import { ICountry } from '../model/icoutry';
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
 @Component({
   selector: 'app-test',
@@ -11,26 +18,45 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./test.component.scss'],
   
 })
-export class TestComponent implements OnInit,AfterViewInit {
+export class TestComponent implements AfterViewInit,OnInit {
 
-  dataSource:any;
-  searchText="";
-  url="https://restcountries.com/v3.1/all";
-  constructor(private http:HttpClient){}
 
-  @ViewChild(MatPaginator) paginator! : MatPaginator; 
+url="https://restcountries.com/v3.1/all";
 
+@Input() restApi!:ICountry[];
+
+
+  displayedColumns: string[] = ['flag', 'name', 'cca2', 'cca3','nativeName','alternativeName','idd'];
+  dataSource = new MatTableDataSource<ICountry>;
+
+  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-      this.http.get(this.url)
-      .subscribe( (data:any) => {this.dataSource = data} )
-  }
-  ngAfterViewInit(): void {
-    this.dataSource = new MatTableDataSource<IContent>(this.dataSource);
-      this.dataSource.paginator = this.paginator;
-      return this.dataSource;
+   
+    this.dataSource = new MatTableDataSource<ICountry>(this.restApi);
+      
   }
 
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  announceSortChange(sortState: Sort) {
+   
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
-
 
