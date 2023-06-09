@@ -5,5 +5,9 @@ table {
   th.mat-sort-header-sorted {
     color: black;
   }
-  .filter{width: 100%;position: sticky;top:0;background: #dcdada;}
-  .paginator{position:sticky;bottom:0;box-shadow: 0 0 5px gray;}
+  .filter{width: 100%;background: #dcdada;}
+  .paginator{box-shadow: 0 0 5px gray;}
+
+  @media screen and (max-width:430px){
+    .filter,.paginator{position: absolute;left:0;right: 0;}
+  }

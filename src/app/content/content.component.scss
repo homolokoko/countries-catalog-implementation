@@ -1,7 +1,8 @@
 
-
-
 .bottom-frame{border-bottom: 1px solid gray;}
-.header{font-weight: 600;text-transform: capitalize;}
+.header{font-weight: 600;text-transform: capitalize;z-index: 98;}
 mat-card{margin-bottom: 10px;}
 mat-card-content{display:flex;gap: 10px;}
+.paginator,.filter{width: 100%;}
+.paginator{box-shadow: 0 0 5px gray;}
+.filter{z-index:99;position: sticky;top:0}

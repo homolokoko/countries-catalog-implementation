@@ -1,8 +1,8 @@
+  <mat-form-field class="filter">
+    <mat-label>Search by name</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </mat-form-field>
 
-<mat-form-field class="filter">
-  <mat-label>Search by name</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-</mat-form-field>
 
 
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"

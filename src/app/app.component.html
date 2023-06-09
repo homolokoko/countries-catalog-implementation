@@ -1,10 +1,10 @@
 <content>
+   <mat-progress-bar mode="indeterminate" *ngIf="!url"></mat-progress-bar>
    <div class="container-fluid disp" *ngIf="url">
-      <!-- <app-content></app-content>  -->
-      <app-test [restApi]="url"></app-test>
-      <!-- <app-test2 [restApi]="url"></app-test2> -->
+      <app-content [restApi]="url"></app-content> 
+      <!-- <app-test [restApi]="url"></app-test> -->
    </div>
-   <mat-spinner class="spin" *ngIf="!url"></mat-spinner>
+   <!-- <mat-spinner class="spin"></mat-spinner> -->
 </content>
 
 
